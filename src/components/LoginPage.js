@@ -1,34 +1,69 @@
 import React, { Component } from 'react'
+import LoginForm from './LoginForm'
+import { auth } from '../firebase'
+
+const INITIAL_STATE = {
+  email: '',
+  password: '',
+  error: null
+}
 
 class LoginPage extends Component {
 
+  constructor (props) {
+    super(props)
+
+    this.onEmailChanged = this.onEmailChanged.bind(this)
+    this.onPasswordChanged = this.onPasswordChanged.bind(this)
+    this.onSubmit = this.onSubmit.bind(this)
+
+    this.state = INITIAL_STATE
+  }
+
+  onEmailChanged (e) {
+    this.setState({ email: e.target.value })
+  }
+
+  onPasswordChanged (e) {
+    this.setState({ password: e.target.value })
+  }
+
+  onSubmit (e) {
+    auth.doSignInWithEmailAndPassword(this.state.email, this.state.password)
+      .then(authUser => {
+        this.setState({ ...INITIAL_STATE })
+      })
+      .catch(e => {
+        this.setState({ ...INITIAL_STATE, error: "Invalid" })
+      })
+
+    e.preventDefault()
+  }
+
   render () {
+    const { email, password } = this.state
+
     return (
-      <div className="flex justify-center">
+      <div className="flex justify-center mt-8">
         <div className="w-full max-w-sm">
-          <h1> NOTELIFY </h1>
 
-          <form className="bg-white border-4 border-black shadow-md px-8 pt-6 pb-8 mb-4">
-            <div className="mb-4">
-              <label className="block font-bold mb-2 text-lg" for="username">
-                EMAIL
-              </label>
-              <input className="shadow appearance-none border-4 border-black w-full py-3 px-3 text-lg" type="text" placeholder="What's your email?" />
-            </div>
+          <div className="bg-black text-white text-center py-2">
+            <span className="text-4xl font-bold"> NOTELIFY </span>
+          </div>
 
-            <div className="mb-6">
-              <label className="block font-bold mb-2 text-lg" for="password">
-                PASSWORD
-              </label>
-              <input className="shadow appearance-none border-4 border-black w-full py-3 px-3 text-lg" type="password" placeholder="*********" />
+          {
+            this.state.error &&
+            <div className="py-4 px-4 bg-red-dark text-center border-l-4 border-r-4 border-black">
+              <span className="text-white tracking-wide text-md">Invalid email or password.</span>
             </div>
+          }
 
-            <div className="text-center">
-              <button type="submit" className="border-4 border-black hover:bg-black hover:text-white font-bold py-3 px-3 w-32" type="button">
-                Login
-              </button>
-            </div>
-          </form>
+          <LoginForm
+            email={email}
+            password={password}
+            emailChanged={this.onEmailChanged}
+            passwordChanged={this.onPasswordChanged}
+            onSubmit={this.onSubmit} />
 
           <p className="text-center text-xs font-bold">
             ©2017 <a href="https://markjoelchavez.com" className="text-black">markjoelchavez.com</a> | All rights reserved.
