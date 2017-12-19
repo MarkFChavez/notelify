@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import LoginPage from './components/LoginPage';
 import HomePage from './components/HomePage';
+import withAuthentication from './components/withAuthentication'
 import * as routes from './config/routes';
 
 class App extends React.Component {
@@ -17,4 +18,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withAuthentication(App);

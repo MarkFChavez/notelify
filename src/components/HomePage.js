@@ -1,8 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import withAuthentication from './withAuthentication'
 
-const HomePage = (props, context) => {
+const HomePage = (props, { authUser }) => {
   return (
     <div>
       welcome to home page
@@ -14,4 +13,4 @@ HomePage.contextTypes = {
   authUser: PropTypes.object
 }
 
-export default withAuthentication(HomePage)
+export default HomePage
