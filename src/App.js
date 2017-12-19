@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-
-const RootPage = () => <div> root page </div>
-const LoginPage = () => <div> login page </div>
-const RegistrationPage = () => <div> registration page </div>
-const HomePage = () => <div> home page </div>
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import LoginPage from './components/LoginPage';
+import * as routes from './config/routes';
 
 const App = () => (
   <Router>
-    <div className="App">
-      <Route exact path="/" component={RootPage} />
-      <Route path="/login" component={LoginPage} />
-      <Route path="/register" component={RegistrationPage} />
-      <Route path="/home" component={HomePage} />
+    <div className="App p-2">
+      {/* <Route exact path={routes.ROOT} component={RootPage} /> */}
+      <Route path={routes.LOGIN} component={LoginPage} />
+      {/* <Route path={routes.REGISTRATION} component={RegistrationPage} />
+      <Route path={routes.HOME} component={HomePage} /> */}
     </div>
   </Router>
 )
