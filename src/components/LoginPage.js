@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import LoginForm from './LoginForm'
 import { auth } from '../firebase'
+import { withRouter } from 'react-router-dom'
+import * as routes from '../config/routes'
 
 const INITIAL_STATE = {
   email: '',
@@ -32,6 +34,7 @@ class LoginPage extends Component {
     auth.doSignInWithEmailAndPassword(this.state.email, this.state.password)
       .then(authUser => {
         this.setState({ ...INITIAL_STATE })
+        this.props.history.push(routes.HOME)
       })
       .catch(e => {
         this.setState({ ...INITIAL_STATE, error: "Invalid" })
@@ -75,4 +78,4 @@ class LoginPage extends Component {
 
 }
 
-export default LoginPage
+export default withRouter(LoginPage)
