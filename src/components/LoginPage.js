@@ -7,6 +7,7 @@ import * as routes from '../config/routes'
 const INITIAL_STATE = {
   email: '',
   password: '',
+  loading: false,
   error: null
 }
 
@@ -31,6 +32,8 @@ class LoginPage extends Component {
   }
 
   onSubmit (e) {
+    this.setState({ loading: true })
+
     auth.doSignInWithEmailAndPassword(this.state.email, this.state.password)
       .then(authUser => {
         this.setState({ ...INITIAL_STATE })
@@ -44,7 +47,7 @@ class LoginPage extends Component {
   }
 
   render () {
-    const { email, password } = this.state
+    const { email, password, loading } = this.state
 
     return (
       <div className="flex justify-center mt-8">
@@ -62,6 +65,7 @@ class LoginPage extends Component {
           }
 
           <LoginForm
+            loading={loading}
             email={email}
             password={password}
             emailChanged={this.onEmailChanged}
