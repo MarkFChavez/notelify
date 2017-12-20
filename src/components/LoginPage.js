@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import LoginForm from './LoginForm'
+import Header from './commons/Header'
 import Footnote from './commons/Footnote'
 import { auth } from '../firebase'
 import { withRouter } from 'react-router-dom'
@@ -54,9 +55,7 @@ class LoginPage extends Component {
       <div className="flex justify-center mt-8">
         <div className="w-full max-w-sm">
 
-          <div className="bg-black text-white text-center py-2">
-            <span className="text-4xl font-bold"> NOTELIFY </span>
-          </div>
+          <Header title="NOTELIFY" />
 
           {
             this.state.error &&
