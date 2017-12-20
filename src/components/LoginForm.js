@@ -1,7 +1,10 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import * as routes from '../config/routes'
 
 const LoginForm = ({ loading, email, password, emailChanged, passwordChanged, onSubmit }) => (
   <form onSubmit={onSubmit} className="bg-white border-4 border-black shadow-md px-8 pt-6 pb-8 mb-4">
+
     <div className="mb-4">
       <label className="block font-bold mb-2 text-lg" htmlFor="email">
         EMAIL
@@ -27,8 +30,11 @@ const LoginForm = ({ loading, email, password, emailChanged, passwordChanged, on
     </div>
 
     <div className="mt-4 text-right">
-      <a href="#" className="text-black font-bold"> create an account </a>
+      <Link to={routes.REGISTRATION}> 
+        <span className="text-black font-bold">create an account</span> 
+      </Link>
     </div>
+
   </form>
 )
 
