@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import RegistrationForm from './RegistrationForm'
+import Footnote from './commons/Footnote'
 
 class RegistrationPage extends Component {
   
@@ -14,9 +15,7 @@ class RegistrationPage extends Component {
 
           <RegistrationForm />
 
-          <p className="text-center text-xs font-bold">
-            ©2017 <a href="https://markjoelchavez.com" className="text-black">markjoelchavez.com</a> | All rights reserved.
-          </p>
+          <Footnote />
         </div>
       </div>
     )

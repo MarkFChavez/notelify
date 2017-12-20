@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import LoginForm from './LoginForm'
+import Footnote from './commons/Footnote'
 import { auth } from '../firebase'
 import { withRouter } from 'react-router-dom'
 import * as routes from '../config/routes'
@@ -72,9 +73,7 @@ class LoginPage extends Component {
             passwordChanged={this.onPasswordChanged}
             onSubmit={this.onSubmit} />
 
-          <p className="text-center text-xs font-bold">
-            ©2017 <a href="https://markjoelchavez.com" className="text-black">markjoelchavez.com</a> | All rights reserved.
-          </p>
+          <Footnote />
         </div>
       </div>
     )
