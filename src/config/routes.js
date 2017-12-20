@@ -1,6 +1,5 @@
-const ROOT = "/"
+const HOME = "/"
 const LOGIN = "/login"
 const REGISTRATION = "/register"
-const HOME = "/home"
 
-export { ROOT, HOME, LOGIN, REGISTRATION }
+export { HOME, LOGIN, REGISTRATION }
