@@ -41,7 +41,7 @@ class LoginPage extends Component {
         this.props.history.push(routes.HOME)
       })
       .catch(e => {
-        this.setState({ ...INITIAL_STATE, error: "Invalid" })
+        this.setState({ ...INITIAL_STATE, error: "Invalid email or password." })
       })
 
     e.preventDefault()
@@ -61,7 +61,7 @@ class LoginPage extends Component {
           {
             this.state.error &&
             <div className="py-4 px-4 bg-red-dark text-center border-l-4 border-r-4 border-black">
-              <span className="text-white tracking-wide text-md">Invalid email or password.</span>
+              <span className="text-white tracking-wide text-md">{this.state.error}</span>
             </div>
           }
 

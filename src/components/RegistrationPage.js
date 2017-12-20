@@ -1,12 +1,16 @@
 import React, { Component } from 'react'
 import RegistrationForm from './RegistrationForm'
 import Footnote from './commons/Footnote'
+import { auth } from '../firebase'
+import * as routes from '../config/routes'
+import { withRouter } from 'react-router-dom'
 
 const INITIAL_STATE = {
-  name: '',
   email: '',
   password: '',
-  confirmPassword: ''
+  confirmPassword: '',
+  error: null,
+  loading: false
 }
 
 class RegistrationPage extends Component {
@@ -23,12 +27,25 @@ class RegistrationPage extends Component {
   }
 
   onSubmit (e) {
-    console.log(this.state)
+    this.setState({ loading: true, error: null })
+
+    if (this.state.password === this.state.confirmPassword) {
+      auth.doCreateUserWithEmailAndPassword(this.state.email, this.state.password)
+        .then(authUser => {
+          this.setState({ ...INITIAL_STATE })
+          this.props.history.push(routes.HOME)
+        })
+        .catch(e => this.setState({ ...INITIAL_STATE, error: e.message }))
+    } else {
+      // render some error message
+      this.setState({ ...INITIAL_STATE, error: "Your passwords do not match." })
+    }
+
     e.preventDefault()
   }
   
   render () {
-    const { name, email, password, confirmPassword } = this.state 
+    const { email, password, confirmPassword, loading } = this.state 
 
     return (
       <div className="flex justify-center mt-8">
@@ -38,13 +55,20 @@ class RegistrationPage extends Component {
             <span className="text-4xl font-bold"> NOTELIFY </span>
           </div>
 
+          {
+            this.state.error &&
+            <div className="py-4 px-4 bg-red-dark text-center border-l-4 border-r-4 border-black">
+              <span className="text-white tracking-wide text-md">{this.state.error}</span>
+            </div>
+          }
+
           <RegistrationForm
             onFieldChanged={this.onFieldChanged}
             onSubmit={this.onSubmit}
-            name={name} 
             email={email} 
             password={password} 
-            confirmPassword={confirmPassword} />
+            confirmPassword={confirmPassword}
+            loading={loading} />
 
           <Footnote />
         </div>
@@ -54,4 +78,4 @@ class RegistrationPage extends Component {
 
 }
 
-export default RegistrationPage
+export default withRouter(RegistrationPage)
