@@ -50,7 +50,7 @@ class RegistrationPage extends Component {
     const { email, password, confirmPassword, loading } = this.state 
 
     return (
-      <div className="flex justify-center mt-8">
+      <div className="flex justify-center lg:items-center lg:h-screen p-2">
         <div className="w-full max-w-sm">
 
           <Header title="NOTELIFY" />

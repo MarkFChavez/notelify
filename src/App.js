@@ -10,7 +10,7 @@ class App extends React.Component {
   render () {
     return (
       <Router>
-        <div className="App p-2">
+        <div className="App">
           <Route exact path={routes.LOGIN} component={LoginPage} />
           <Route exact path={routes.REGISTRATION} component={RegistrationPage} />
           <Route exact path={routes.HOME} component={HomePage} />
