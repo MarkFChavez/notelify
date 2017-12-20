@@ -17,6 +17,7 @@ class RegistrationPage extends Component {
 
   constructor (props) {
     super(props)
+
     this.onFieldChanged = this.onFieldChanged.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
     this.state = INITIAL_STATE
