@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import LoginForm from './LoginForm'
 import Header from './commons/Header'
 import Footnote from './commons/Footnote'
+import ErrorMessage from './commons/ErrorMessage'
 import { auth } from '../firebase'
 import { withRouter } from 'react-router-dom'
 import * as routes from '../config/routes'
@@ -57,12 +58,7 @@ class LoginPage extends Component {
 
           <Header title="NOTELIFY" />
 
-          {
-            this.state.error &&
-            <div className="py-4 px-4 bg-red-dark text-center border-l-4 border-r-4 border-black">
-              <span className="text-white tracking-wide text-md">{this.state.error}</span>
-            </div>
-          }
+          {this.state.error && <ErrorMessage message={this.state.error} />}
 
           <LoginForm
             loading={loading}

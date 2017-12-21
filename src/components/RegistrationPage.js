@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import RegistrationForm from './RegistrationForm'
 import Footnote from './commons/Footnote'
+import ErrorMessage from './commons/ErrorMessage'
 import Header from './commons/Header'
 import { auth } from '../firebase'
 import * as routes from '../config/routes'
@@ -55,12 +56,7 @@ class RegistrationPage extends Component {
 
           <Header title="NOTELIFY" />
 
-          {
-            this.state.error &&
-            <div className="py-4 px-4 bg-red-dark text-center border-l-4 border-r-4 border-black">
-              <span className="text-white tracking-wide text-md">{this.state.error}</span>
-            </div>
-          }
+          {this.state.error && <ErrorMessage message={this.state.error} />}
 
           <RegistrationForm
             onFieldChanged={this.onFieldChanged}
